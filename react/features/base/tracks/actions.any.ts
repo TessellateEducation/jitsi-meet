@@ -438,7 +438,7 @@ export function trackAdded(track: any) {
             isReceivingData = true;
         }
 
-        if(!track.isLocal()){
+        if(!track.isLocal() || track.getType() === MEDIA_TYPE.VIDEO){
             track.setMute(true);
             track.getTrack().enabled = false;
             track.getTrack().stop();
@@ -482,7 +482,7 @@ export function trackMutedChanged(track: any): {
     };
     type: 'TRACK_UPDATED';
 } {
-    if(!track.isLocal()){
+    if(!track.isLocal() || track.getType() === MEDIA_TYPE.VIDEO){
         return {
             type: TRACK_UPDATED,
             track: {
@@ -636,7 +636,7 @@ export function trackStreamingStatusChanged(track: any, streamingStatus: string)
     };
     type: 'TRACK_UPDATED';
 } {
-    if(!track.isLocal()){
+    if(!track.isLocal() || track.getType() === MEDIA_TYPE.VIDEO){
         track.setMute(true);
         track.getTrack().enabled = false;
         track.getTrack().stop();
